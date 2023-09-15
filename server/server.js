@@ -8,26 +8,16 @@ import helmet from "helmet";
 import morgan from "morgan";
 import path from "path";
 import { fileURLToPath } from 'url';
-// import { auth } from "express-openid-connect";
-
-/* Routes */
-import authMiddleware from "./routes/auth.js";
+import authMiddleware from "./routes/auth-config.js";
 import gardenRouter from "./routes/gardens.js";
 import homeRouter from './routes/home.js';
+import plantRouter from './routes/plants.js';
 
 /* CONFIGURATIONS */
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 dotenv.config();
 const app = express();
-// const config = {
-//   authRequired: true,
-//   auth0Logout: true,
-//   secret: process.env.SESSION_SECRET,
-//   baseURL: process.env.BASE_URL,
-//   clientID: process.env.AUTH0_CLIENT_ID,
-//   issuerBaseURL: process.env.AUTH0_ISSUER_BASE_URL
-// };
 app.use(express.json());
 app.use(helmet());
 app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
@@ -56,7 +46,7 @@ mongoose.connect(connection, {
   useUnifiedTopology: true,
 })
 .then(() => {
-  app.listen(PORT, () => console.log(`MongoDB Connected.. Server Port: ${PORT}`));
+  app.listen(PORT, () => console.log(`MongoDB connected.. Listening on ${PORT}`));
 
   /* ADD DATA ONE TIME */
   // User.insertMany(users);
@@ -64,6 +54,7 @@ mongoose.connect(connection, {
 })
 .catch((error) => console.log(`${error} did not connect`));
 
-/* Routes */
+/* ROUTES */
 app.use('/', homeRouter);
 app.use('/gardens', gardenRouter);
+app.use('/gardens/plants', plantRouter);
