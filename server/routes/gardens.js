@@ -1,24 +1,22 @@
 import express from "express";
-import createGarden from "../controllers/gardenController.js";
+import { 
+    createGarden,
+    getAllGardens,
+    getGarden,
+    deleteGarden,
+    updateGarden } from '../controllers/gardenController.js';
+
 
 const router = express.Router();
 
-// router.get('/', getAllGardens)
+router.get('/', getAllGardens);
 
-// router.get('/:gardenId', getGarden)
+router.get('/:id', getGarden);
 
-router.post('/', createGarden)
+router.post('/', createGarden);
 
-router.delete('/', (req, res) => {
-    res.json({msg: "DELETE garden"})
-})
+router.delete('/:id', deleteGarden);
 
-router.delete('/:id', (req, res) => {
-    res.json({msg: "DELETE a single garden only!"})
-})
-
-router.patch('/:id', (req, res) => {
-    res.json({msg: "UPDATE a single garden"})
-})
+router.patch('/:id', updateGarden);
 
 export default router;

@@ -1,22 +1,25 @@
 import express from "express";
+import { createPlant,
+        getAllPlants,
+        getPlant,
+        deletePlant,
+        updatePlant} from "../controllers/plantController.js";
+
 const router = express.Router();
 
-router.get('/', (req, res) => {
-    res.json({msg: "GET all plants in garden"})
-})
+// Get all plants in the Garden
+router.get('/', getAllPlants);
 
-router.get('/:id', (req, res) => {
-    res.json({msg: "Get single plant"})
-})
+// Get specific plant
+router.get('/:plantId', getPlant);
 
-router.post('/', async (req, res) => {
-    const {plantname, scientificname, plantingDate} = req.body
-    try {
-        const plant = await Plant.create({plantname, scientificname, plantingDate})
-        res.status(200).json(plant)
-    } catch (error) {
-        res.status(400).json({error: error.message})
-    }
-})
+// Create new plant
+router.post('/', createPlant);
+
+// Delete a plant
+router.delete('/:plantId', deletePlant);
+
+// Update a plant
+router.patch('/:plantId', updatePlant);
 
 export default router;

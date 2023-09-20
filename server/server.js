@@ -9,8 +9,8 @@ import morgan from "morgan";
 import path from "path";
 import { fileURLToPath } from 'url';
 import authMiddleware from "./routes/auth-config.js";
-import gardenRouter from "./routes/gardens.js";
 import homeRouter from './routes/home.js';
+import gardenRouter from "./routes/gardens.js";
 import plantRouter from './routes/plants.js';
 
 /* CONFIGURATIONS */
@@ -57,4 +57,5 @@ mongoose.connect(connection, {
 /* ROUTES */
 app.use('/', homeRouter);
 app.use('/gardens', gardenRouter);
-app.use('/gardens/plants', plantRouter);
+app.use('/gardens/:gardenId/plants', plantRouter);
+
