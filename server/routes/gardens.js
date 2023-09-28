@@ -6,7 +6,6 @@ import {
     deleteGarden,
     updateGarden } from '../controllers/gardenController.js';
 
-
 const router = express.Router();
 
 router.get('/', getAllGardens);

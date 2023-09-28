@@ -1,6 +1,6 @@
 import User from "../models/userModel.js";
 
-//create user
+//create and update user
 const createUser = async (req, res) => {
     if (req.oidc.isAuthenticated()) {
         const auth0User = req.oidc.user;

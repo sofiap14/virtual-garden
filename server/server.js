@@ -58,4 +58,3 @@ mongoose.connect(connection, {
 app.use('/', homeRouter);
 app.use('/gardens', gardenRouter);
 app.use('/gardens/:gardenId/plants', plantRouter);
-
