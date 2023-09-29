@@ -1,17 +1,19 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import axios from 'axios';
+import { useGardensContext } from '../hooks/useGardensContext'
 
 // components
 import GardenDetails from "../components/GardenDetails"
 
 const Home = () => {
-  const [gardens, setGardens] = useState(null);
+
+  const {gardens, dispatch} = useGardensContext()
 
   useEffect(() => {
     const fetchGardens = async () => {
       const response = await axios('/gardens/').catch(err => {console.log(err)});
       const json = response.data;
-      setGardens(json);
+      dispatch({type:'SET_GARDENS', payload: json})
     };
 
     fetchGardens();
