@@ -33,6 +33,7 @@ const CreateGardenForm = () => {
 
   const showCreateForm = () => {
     setShowCreateForm(true);
+    setIsFormSubmitted(false);
   };
 
   return (

@@ -16,24 +16,22 @@ export const gardensReducer = (state, action) => {
             return {
                 gardens: state.gardens.filter((garden) => garden._id !== action.payload._id)
             }
-            case 'UPDATE_GARDEN': {
-                // Find the index of the garden to be updated in the state
-                const gardenIndex = state.gardens.findIndex(garden => garden._id === action.payload._id);
+        case 'UPDATE_GARDEN': {
+            // Find the index of the garden to be updated in the state
+            const gardenIndex = state.gardens.findIndex(garden => garden._id === action.payload._id); 
+            if (gardenIndex === -1) {
+              // Garden not found, return the current state
+              return state;
+            }
               
-                if (gardenIndex === -1) {
-                  // Garden not found, return the current state
-                  return state;
-                }
+            // Create a copy of the state and update the specific garden
+            const updatedGardens = [...state.gardens];
+            updatedGardens[gardenIndex] = action.payload;
               
-                // Create a copy of the state and update the specific garden
-                const updatedGardens = [...state.gardens];
-                updatedGardens[gardenIndex] = action.payload;
-              
-                return {
-                  gardens: updatedGardens
-                };
-              }
-
+            return {
+              gardens: updatedGardens
+            };
+        }
         default:
             return state
     }

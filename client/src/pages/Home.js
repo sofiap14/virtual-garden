@@ -17,7 +17,7 @@ const Home = () => {
     };
 
     fetchGardens();
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className="Home">
