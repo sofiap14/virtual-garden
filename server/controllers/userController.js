@@ -25,9 +25,8 @@ const createUser = async (req, res) => {
             user.lastName = auth0User.family_name;
             await user.save();
           }
-
+    
           res.send(`Welcome, ${auth0User.given_name} ${auth0User.family_name}!`);
-          
         } catch (error) {
           console.error(error);
           res.status(500).send('Internal Server Error');
