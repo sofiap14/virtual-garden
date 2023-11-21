@@ -10,8 +10,9 @@ import path from "path";
 import { fileURLToPath } from 'url';
 import authMiddleware from "./routes/auth-config.js";
 import homeRouter from './routes/home.js';
-import gardenRouter from "./routes/gardens.js";
+import gardenRouter from './routes/gardens.js';
 import plantRouter from './routes/plants.js';
+import userRoutes from './routes/user.js';
 
 /* CONFIGURATIONS */
 const __filename = fileURLToPath(import.meta.url);
@@ -24,7 +25,11 @@ app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
 app.use(morgan("common"));
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
-app.use(cors());
+const corsOptions = {
+  origin: '*', 
+  credentials: true,
+};
+app.use(cors(corsOptions));
 app.use(authMiddleware);
 
 /* FILE STORAGE */
@@ -56,5 +61,6 @@ mongoose.connect(connection, {
 
 /* ROUTES */
 app.use('/', homeRouter);
+app.use('/user', userRoutes);
 app.use('/gardens', gardenRouter);
 app.use('/gardens/:gardenId/plants', plantRouter);

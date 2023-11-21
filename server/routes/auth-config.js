@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const authConfig = {
-    authRequired: false,
+    authRequired: true,
     auth0Logout: true,
     secret: process.env.SESSION_SECRET,
     baseURL: process.env.BASE_URL,
