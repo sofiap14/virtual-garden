@@ -16,7 +16,7 @@ export const gardensReducer = (state, action) => {
             return {
                 gardens: state.gardens.filter((garden) => garden._id !== action.payload._id)
             }
-            case 'UPDATE_GARDEN': {
+        case 'UPDATE_GARDEN': {
                 // Find the index of the garden to be updated in the state
                 const gardenIndex = state.gardens.findIndex(garden => garden._id === action.payload._id);
               
@@ -32,7 +32,7 @@ export const gardensReducer = (state, action) => {
                 return {
                   gardens: updatedGardens
                 };
-              }
+            }
 
         default:
             return state

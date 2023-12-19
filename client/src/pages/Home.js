@@ -1,32 +1,48 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import axios from 'axios';
 import { useGardensContext } from '../hooks/useGardensContext'
 
 // components
 import GardenDetails from "../components/GardenDetails"
+import Login from "./Login";
 
 const Home = () => {
 
   const {gardens, dispatch} = useGardensContext()
 
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
   useEffect(() => {
     const fetchGardens = async () => {
-      const response = await axios('/gardens/').catch(err => {console.log(err)});
-      const json = response.data;
-      dispatch({type:'SET_GARDENS', payload: json})
+      try{
+        const response = await axios('/gardens/', { withCredentials: true }).catch(err => { console.log(err) });
+        const json = response.data;
+        dispatch({type:'SET_GARDENS', payload: json})
+        setIsAuthenticated(true)
+      } catch (error) {
+        if (error.response && error.response === 401) {
+          setIsAuthenticated(false);
+        } else {
+          console.log('error: ', error.message);
+        }
+      }
+
     };
 
     fetchGardens();
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className="Home">
-      <div className="gardens">
-        { gardens && gardens.map((garden) => (
-          <GardenDetails key={garden._id} garden={garden} />
-        ))}
-      </div>
-
+      {isAuthenticated ? (
+        <div className="gardens">
+          { gardens && gardens.map((garden) => (
+            <GardenDetails key={garden._id} garden={garden} />
+          ))}
+        </div>
+      ) : (
+        <div>Please log in to access this content <Login /></div>
+      )}
     </div>
   );
 };
