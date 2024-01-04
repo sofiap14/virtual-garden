@@ -4,7 +4,8 @@ import { useGardensContext } from '../hooks/useGardensContext'
 
 // components
 import GardenDetails from "../components/GardenDetails"
-import Login from "./Login";
+import Login from "../components/Login";
+import Navbar from "../components/NavBar";
 
 const Home = () => {
 
@@ -34,6 +35,7 @@ const Home = () => {
 
   return (
     <div className="Home">
+      <Navbar />
       {isAuthenticated ? (
         <div className="gardens">
           { gardens && gardens.map((garden) => (

@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import CreateGardenForm from './CreateGardenForm'
+import LogoutButton from './Logout'
 
 const Navbar = () => {
     return (
@@ -8,6 +9,7 @@ const Navbar = () => {
                 <Link to="/">
                     <h1>Virtual Garden</h1>
                 </Link>
+                <LogoutButton />
                 <div><CreateGardenForm /></div>
             </div>
         </header>
