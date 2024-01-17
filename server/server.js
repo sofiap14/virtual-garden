@@ -27,6 +27,8 @@ app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors());
 app.use(authMiddleware);
 
+app.use(express.static(__dirname + '/public'));
+
 /* FILE STORAGE */
 const storage = multer.diskStorage({
   destination: function(req, file, cb) {
