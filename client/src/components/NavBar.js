@@ -9,7 +9,7 @@ const Navbar = () => {
                 <Link to="/">
                     <h1>Virtual Garden</h1>
                 </Link>
-                <LogoutButton />
+                <LogoutButton className='mx-10' />
                 <div><CreateGardenForm /></div>
             </div>
         </header>

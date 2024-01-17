@@ -21,7 +21,7 @@ const DeleteGarden = ({garden}) => {
 
     return(
         <div>
-            <button onClick={handleDelete}>Delete</button>
+            <button className="btn-primary" onClick={handleDelete}>Delete</button>
             {error && <div className="error">{error}</div>}
         </div>
     )

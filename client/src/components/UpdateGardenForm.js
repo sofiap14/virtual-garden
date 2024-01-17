@@ -41,7 +41,7 @@ const UpdateGardenForm = ({ garden }) => {
 
   return (
     <div>
-      <button onClick={showUpdateForm}>Update</button>
+      <button className="btn-primary" onClick={showUpdateForm}>Update</button>
       {showForm && !isFormSubmitted && (
         <form className="update-garden" onSubmit={handleUpdateGarden}>
           <h3>Update Garden</h3>

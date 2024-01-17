@@ -38,7 +38,7 @@ const Home = () => {
       ) : (
         <div className="login-container">
           <p>Please log in to access this content</p>
-          <button className="create-garden-button" onClick={() => loginWithRedirect()}>Log In</button>
+          <button className="btn-primary" onClick={() => loginWithRedirect()}>Log In</button>
         </div>
       )}
     </div>
