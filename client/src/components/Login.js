@@ -6,7 +6,7 @@ const LoginButton = () => {
 
   return (
     !isAuthenticated && (
-      <button onClick={() => loginWithRedirect({ redirectUri: `${window.location.origin}/home`, appState: {returnTo: window.location.href} })}>
+      <button className='p-0.5 bg-greenBG rounded-md border-2' onClick={() => loginWithRedirect({ redirectUri: `${window.location.origin}/home`, appState: {returnTo: window.location.href} })}>
         Log In
       </button>
     )

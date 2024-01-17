@@ -40,7 +40,7 @@ export const gardensReducer = (state, action) => {
 }
 
 export const GardensContextProvider = ({ children }) => { // provide the created context to our app component tree by creating a ContextProvider component 
-
+    
     const [state, dispatch] = useReducer(gardensReducer, {
         gardens: null
     })

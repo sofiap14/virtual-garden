@@ -1,49 +1,45 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import axios from 'axios';
-import { useGardensContext } from '../hooks/useGardensContext'
-
-// components
-import GardenDetails from "../components/GardenDetails"
-import Login from "../components/Login";
+import { useGardensContext } from '../hooks/useGardensContext';
+import { useAuth0 } from '@auth0/auth0-react';
+import GardenDetails from "../components/GardenDetails";
 import Navbar from "../components/NavBar";
 
 const Home = () => {
-
-  const {gardens, dispatch} = useGardensContext()
-
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const { gardens, dispatch } = useGardensContext();
+  const { isAuthenticated, loginWithRedirect } = useAuth0();
 
   useEffect(() => {
     const fetchGardens = async () => {
-      try{
-        const response = await axios('/gardens/', { withCredentials: true }).catch(err => { console.log(err) });
+      try {
+        const response = await axios('/gardens/', { withCredentials: true });
         const json = response.data;
-        dispatch({type:'SET_GARDENS', payload: json})
-        setIsAuthenticated(true)
+        dispatch({ type: 'SET_GARDENS', payload: json });
       } catch (error) {
-        if (error.response && error.response === 401) {
-          setIsAuthenticated(false);
-        } else {
-          console.log('error: ', error.message);
-        }
+        console.log('error: ', error.message);
       }
-
     };
 
-    fetchGardens();
-  }, [dispatch]);
+    if (isAuthenticated) {
+      fetchGardens();
+    }
+
+  }, [isAuthenticated, dispatch]);
 
   return (
     <div className="Home">
-      <Navbar />
       {isAuthenticated ? (
         <div className="gardens">
-          { gardens && gardens.map((garden) => (
+          <Navbar />
+          {gardens && gardens.map((garden) => (
             <GardenDetails key={garden._id} garden={garden} />
           ))}
         </div>
       ) : (
-        <div>Please log in to access this content <Login /></div>
+        <div className="login-container">
+          <p>Please log in to access this content</p>
+          <button className="create-garden-button" onClick={() => loginWithRedirect()}>Log In</button>
+        </div>
       )}
     </div>
   );
