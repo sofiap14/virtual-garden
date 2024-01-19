@@ -15,25 +15,28 @@ const Welcome = () => {
 
   return (
       <section className="bg-palepinkBG">
+        
         <div className="grid h-screen grid-cols-2">
           <div className='flex flex-col w-full justify-center h-screen bg-black'>
-              <h1 className='text-4xl text-white p-8'>
-                Track your 
-                <span style={{fontWeight: 'bold', color:'white'}}>
-                  {text}
-                </span>
-                <span style={{color: 'red'}}><Cursor /></span>
-              </h1>
+            <nav className='flex flex-row w-1/2 font-sans text-2xl font-semibold top-0 left-0 pl-8 pr-8 pt-4 text-white absolute'>plantopia</nav>
+                <h1 className='text-4xl text-white p-8'>
+                  Track your 
+                  <span style={{fontWeight: 'bold', color:'white'}}>
+                    {text}
+                  </span>
+                  <span style={{color: 'red'}}><Cursor /></span>
+                </h1>
           </div>
 
           <div class="flex h-screen bg-darkBG">
             <div className='m-auto'> 
-              <h1 className="text-3xl text-white">WELCOME TO YOUR APP!</h1>
-              <div className="text-md mt-8">
-                <LoginButton className='flex flex-row w-12'/>
+              <h1 className="text-3xl text-white font-bold mb-5">WELCOME TO YOUR APP!</h1>
+              <div className='flex justify-center'> 
+                <LoginButton />
                 <LogoutButton />
               </div>
             </div>
+
           </div>
         </div>
       </section>
