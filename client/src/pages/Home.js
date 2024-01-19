@@ -28,9 +28,9 @@ const Home = () => {
 
   return (
     <div className="Home">
+        <Navbar />
       {isAuthenticated ? (
-        <div className="gardens">
-          <Navbar />
+        <div className="grid grid-cols-4 gap-4 m-10">
           {gardens && gardens.map((garden) => (
             <GardenDetails key={garden._id} garden={garden} />
           ))}
