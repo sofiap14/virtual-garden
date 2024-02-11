@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-// import CreateGardenForm from './CreateGardenForm'
+import CreateGardenForm from './CreateGardenForm'
 import LogoutButton from './Logout';
 import backgroundImage from '../imgbg.jpg';
 
@@ -19,6 +19,7 @@ const Navbar = () => {
           <h1>Virtual Garden</h1>
         </Link>
         <LogoutButton />
+        <CreateGardenForm />
       </div>
     </header>
   );

@@ -24,11 +24,17 @@ const getAllPlants = async (req, res) => {
     const { gardenId } = req.params;
     try {
         const plants = await Plant.find({ garden: gardenId }).sort({ createdAt: -1 });
+        
+        if (plants.length === 0) {
+            return res.status(200).json({ message: 'No plants found in this garden' });
+        }
+
         res.status(200).json(plants);
     } catch (error) {
         res.status(500).json({ error: 'An error occurred while fetching plants' });
     }
 }
+
 
 // Get a single plant
 const getPlant = async (req, res) => {
